@@ -13,7 +13,13 @@ func Transfer(c *fiber.Ctx) error {
 		return err
 	}
 
-	err := services.StartTransferProcess(transferRequest)
+	resultChan := make(chan error)
+	go func() {
+		err := services.StartTransferProcess(transferRequest)
+		resultChan <- err
+	}()
+
+	err := <-resultChan
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).SendString(err.Error())
 	}
