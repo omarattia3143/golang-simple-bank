@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-var db *memdb.MemDB
+var DB *memdb.MemDB
 
 // SetupAndConnectMemDb SetupMemDb setup memory database, I am using go-memDb
 func SetupAndConnectMemDb() {
@@ -41,7 +41,7 @@ func SetupAndConnectMemDb() {
 
 	// connect to db
 	var err error
-	db, err = memdb.NewMemDB(schema)
+	DB, err = memdb.NewMemDB(schema)
 	if err != nil {
 		panic(err)
 	}
@@ -62,7 +62,7 @@ func SeedDb() {
 	}
 
 	// make a write transaction to insert accounts into db
-	txn := db.Txn(true)
+	txn := DB.Txn(true)
 
 	// loop over accounts and add them to db
 	for _, s := range accounts {
