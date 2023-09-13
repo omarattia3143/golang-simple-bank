@@ -74,4 +74,5 @@ func SeedDb() {
 	// commit the transaction
 	txn.Commit()
 	fmt.Println("Accounts are added to the memory database")
+	fmt.Println("---------ready to make a transfer------------")
 }
