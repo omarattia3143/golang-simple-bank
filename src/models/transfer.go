@@ -1,7 +1,7 @@
 package models
 
-type Transfer struct {
-	FromAccount MyUUID `json:"fromAccount,omitempty"`
-	ToAccount   MyUUID `json:"toAccount,omitempty"`
+type TransferRequest struct {
+	FromAccount string `json:"fromAccount,omitempty"`
+	ToAccount   string `json:"toAccount,omitempty"`
 	Amount      string `json:"amount,omitempty"`
 }
