@@ -7,6 +7,9 @@ import (
 
 func Setup(app *fiber.App) {
 	api := app.Group("api/v1")
+
 	api.Get("accounts", controllers.Accounts)
 	api.Get("accounts/:id", controllers.Account)
+
+	api.Post("transfer", controllers.Transfer)
 }
