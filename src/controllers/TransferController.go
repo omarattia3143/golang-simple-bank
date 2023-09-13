@@ -15,6 +15,7 @@ func Transfer(c *fiber.Ctx) error {
 
 	resultChan := make(chan error)
 	go func() {
+		defer close(resultChan)
 		err := services.StartTransferProcess(transferRequest)
 		resultChan <- err
 	}()

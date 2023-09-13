@@ -14,6 +14,7 @@ func Accounts(c *fiber.Ctx) error {
 
 	// use a goroutine to fetch accounts from the database
 	go func() {
+		defer close(resultChan)
 		// grab accounts from database
 		accounts := services.GetAllAccounts()
 		// send the result to the channel
@@ -39,6 +40,9 @@ func Account(c *fiber.Ctx) error {
 	errChan := make(chan error)
 
 	go func() {
+		defer close(accountChan)
+		defer close(errChan)
+
 		account := services.GetAccount(id)
 		accountChan <- account
 	}()
