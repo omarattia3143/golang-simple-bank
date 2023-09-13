@@ -1,0 +1,82 @@
+{
+	"info": {
+		"_postman_id": "14ca00fb-df61-4511-a207-8a1f42ddc012",
+		"name": "PayTabs backend challenage",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get account by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/accounts/0e310275-ab11-4a11-a572-642eb0715550",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"accounts",
+						"0e310275-ab11-4a11-a572-642eb0715550"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all accounts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/accounts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transfer from to account",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fromAccount\": \"03eb9399-e526-431f-812f-2fda01659022\",\r\n    \"toAccount\": \"04943793-8f35-4d73-aa93-0ef2da57d22e\",\r\n    \"amount\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/transfer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"transfer"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
