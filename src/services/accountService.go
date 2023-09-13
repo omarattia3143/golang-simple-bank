@@ -6,7 +6,7 @@ import (
 	"github.com/omarattia3143/paytabs-backend-challenge/src/models"
 )
 
-func GetAllAccounts() []models.Account {
+func GetAllAccounts() *[]models.Account {
 
 	// Create read-only transaction
 	txn := database.DB.Txn(false)
@@ -24,10 +24,13 @@ func GetAllAccounts() []models.Account {
 		account := obj.(*models.Account)
 		accounts = append(accounts, *account)
 	}
-	return accounts
+	return &accounts
 }
 
-func GetAccount(id string) models.Account {
+func GetAccount(id string) *models.Account {
+
+	log := fmt.Sprintf("getting account id %s", id)
+	fmt.Println(log)
 
 	// Create read-only transaction
 	txn := database.DB.Txn(false)
@@ -37,6 +40,8 @@ func GetAccount(id string) models.Account {
 	if err != nil {
 		panic(err)
 	}
-
-	return *raw.(*models.Account)
+	if raw == nil {
+		return nil
+	}
+	return raw.(*models.Account)
 }
