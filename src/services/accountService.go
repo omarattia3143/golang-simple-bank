@@ -2,6 +2,7 @@ package services
 
 import (
 	"fmt"
+	"github.com/hashicorp/go-memdb"
 	"github.com/omarattia3143/paytabs-backend-challenge/src/database"
 	"github.com/omarattia3143/paytabs-backend-challenge/src/models"
 )
@@ -44,4 +45,41 @@ func GetAccount(id string) *models.Account {
 		return nil
 	}
 	return raw.(*models.Account)
+}
+
+func UpdateAccountsBalance(fromAccount *models.Account, toAccount *models.Account) error {
+	// commit transaction once to avoid race cases
+	txn := database.DB.Txn(true)
+
+	var err error
+	err = updateAccount(fromAccount, txn)
+	if err != nil {
+		return err
+	}
+
+	err = updateAccount(toAccount, txn)
+	if err != nil {
+		return err
+	}
+
+	txn.Commit()
+	return nil
+}
+
+func updateAccount(accountToUpdate *models.Account, txn *memdb.Txn) error {
+	raw, err := txn.First("account", "id", accountToUpdate.Id)
+	if err != nil {
+		return err
+	}
+
+	if raw != nil {
+		dbAccount := raw.(*models.Account)
+		// balance mapping
+		dbAccount.Balance = accountToUpdate.Balance
+
+		if err := txn.Insert("account", dbAccount); err != nil {
+			return err
+		}
+	}
+	return nil
 }
