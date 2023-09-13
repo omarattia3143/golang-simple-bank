@@ -7,6 +7,12 @@ import (
 	"github.com/omarattia3143/paytabs-backend-challenge/src/models"
 )
 
+type AccountService interface {
+	GetAllAccounts() *[]models.Account
+	GetAccount(id string) *models.Account
+	UpdateAccountsBalance(fromAccount *models.Account, toAccount *models.Account) error
+}
+
 func GetAllAccounts() *[]models.Account {
 
 	// Create read-only transaction

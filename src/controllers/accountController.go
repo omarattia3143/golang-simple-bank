@@ -7,6 +7,7 @@ import (
 	"github.com/omarattia3143/paytabs-backend-challenge/src/services"
 )
 
+// Accounts get list of all accounts
 func Accounts(c *fiber.Ctx) error {
 	// create a channel to receive the result
 	resultChan := make(chan []models.Account)
@@ -25,6 +26,7 @@ func Accounts(c *fiber.Ctx) error {
 	return c.JSON(accounts)
 }
 
+// Account get single account by id
 func Account(c *fiber.Ctx) error {
 	id := c.Params("id")
 	//validate uuid
