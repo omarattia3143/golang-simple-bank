@@ -1,4 +1,3 @@
-# paytabs-backend-challenge
 A golang solution for paytabs backend challenge
 packages: fiber v2 as web framework, go-memdb for in-memory database
 how to run: run main.go file
